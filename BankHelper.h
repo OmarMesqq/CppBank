@@ -1,51 +1,47 @@
+#ifndef BANK_HELPER_H 
+#define BANK_HELPER_H
+
 #include <iostream>
 #include <ctime>
 #include <cstdlib>
 
-#define TRUE = 0   //defining booleans
-#define FALSE = 1
-
 class BankAccount {   //aspects of the bank account
+BankAccount() : Balance(0.0) {}
+~BankAccount() {
+  std::cout << "It was an honor to have you in CppBank. Goodbye!\n\n" << std::endl;
+}
 public:
-  long double Balance;
   void Deposit();
   void Withdraw();
-  char Name[256];
-  bool IsOnline;
-  BankAccount(){
-    Balance = 0.0;
-  };
-  ~BankAccount();
+  void setName();
+  void setPassword();
+  void CloseAccount()
+  BankAccount * ptr = NULL;
 private:
-  unsigned short AccNum;
-  char passwd[256];
+  const unsigned short AccNum;
+  string passwd;
+  const string Name;
+  long double Balance;
 };
 
 void CreateAccount() {
-  BankAccount NewAcc; //creates the object "NewAcc" from class "BankAccount"
+  BankAccount NewAccount; //creates the object "NewAccount" from class "BankAccount"
+  ptr = &NewAccount; //assigns the pointer to the created object in case of account deletion
 
-  std::cout << "Enter your full name:\n";
-  std::cin >> BankAccount::Name;
+  std::cout << "Enter your name:\n" << std::endl;   //sets name
+  string x;
+  std::cin >> x;
+  BankAccount.setName(x); 
 
-  std::cout << "Enter your password\n";
-  std::cin >> BankAccount::passwd;
+  std::cout << "Set a password:\n" << std::endl;  //sets password
+  string pwd;
+  ptr->setPassword(pwd); //same as using BankAccount.setPassword (pwd)
 
-  std::cout << "Re-enter your password:\n";
-  char checkPasswd[256];  //check if password is correct
-  char * Bye[] = checkPasswd;  //pointer pointing to the array above for future use
-  std::cin >> checkPasswd;
+  std::cout << "Please write down your account number:\n" << std::endl;  //sets account number
+  std::cout << AccGen() << std::cout;
 
-  if (checkPasswd==BankAccount::passwd) {
-    std::cout << "|||||||||||||||||SUMMARY||||||||||||||||\n\n";
-    std::cout << "Your name: " << BankAccount::Name << endl;
-    std::cout << "Your password: " << BankAccount::passwd << endl;
-    std::cout << "Your account number: " << AccGen() << endl;
-    delete Bye;  // deletes the pointer, thus freeing space in the stack
-  }
-  else {
-    std::cout << "Your passwords do not match" << endl;
-  }
 }
+ 
 
 short AccGen() {
   srand(time(NULL));  //high entropy seed : local time
@@ -73,4 +69,17 @@ void Withdraw(double AmmOut) {
   }
 }
 
+void setName(string x) {
+  Name = x;
+}
+
+void setPassword(string x) {
+  passwd = x;
+}
+
+void CloseAccount() {
+  delete ptr;  //deletes pointer to created object, destroying it
+}
+
+#endif // BANK_HELPER_H
 
