@@ -4,6 +4,7 @@
 #include <iostream>
 #include <ctime>
 #include <cstdlib>
+#include <string>
 
 class BankAccount {   //aspects of the bank account
 BankAccount() : Balance(0.0) {}
@@ -14,14 +15,14 @@ public:
   void Deposit();
   void Withdraw();
   void setName();
-  void setPassword();
   void CloseAccount()
-  BankAccount * ptr = NULL;
+  BankAccount * ptr = this;
 private:
   const unsigned short AccNum;
   string passwd;
   const string Name;
   long double Balance;
+  friend void setPassword();
 };
 
 void CreateAccount() {
@@ -44,7 +45,7 @@ void CreateAccount() {
  
 
 short AccGen() {
-  srand(time(NULL));  //high entropy seed : local time
+  srand(time(NULL));  //entropy seed : local time
   return 1 + (rand() % 99);    //returns value between 1 and 99 (range of the bank accounts IDs)
 }
 
@@ -81,5 +82,8 @@ void CloseAccount() {
   delete ptr;  //deletes pointer to created object, destroying it
 }
 
+
+
 #endif // BANK_HELPER_H
+
 
