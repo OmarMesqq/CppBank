@@ -1,4 +1,4 @@
-// CppBank v 0.2
+// CppBank v 0.3
 #include <iostream>
 #include "BankHelper.h"
 
@@ -10,7 +10,4 @@ int main() {
 }
 
 
-//VERSION TRACKING:
-
-// v0.1: initial commit
-// v0.2: functioning release
+//TO-DO:
