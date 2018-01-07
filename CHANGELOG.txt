@@ -1,0 +1,3 @@
+v0.1: initial debug version
+v0.2: official release
+v0.3: actual functioning release
