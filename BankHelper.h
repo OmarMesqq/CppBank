@@ -67,9 +67,20 @@ void CreateAccount() {
 	std::cout << "Set a password: ";  //sets password
 	std::string pwd;
 	std::cin >> pwd;
-	ptr->setPassword(pwd); //same as using BankAccount.setPassword (pwd)
+	std::cout << "Type in your password again: ";
+	std::string chckPW;
+	std::cin >> chckPW;
+	if (chckPW == pwd) {
+		ptr->setPassword(pwd);
+	}
+	else {
+		std::cout << "Your passwords do not match" << std::endl;
+		system("pause");
+		exit(0);
+	}
 
-	std::cout << "Please write down your account number: " << AccGen() << "\n" << std::endl;  //sets account number
+
+	std::cout << "Please write down your account number: " << AccGen() << std::endl;
 	system("pause");
 
 }
