@@ -59,17 +59,18 @@ void CreateAccount() {
 	BankAccount NewAccount; //creates the object "NewAccount" from class "BankAccount"
 	BankAccount * ptr = &NewAccount; //assigns the pointer to the created object in case of account deletion
 
-	std::cout << "Enter your name:\n" << std::endl;   //sets name
+	std::cout << "Enter your name: ";   //sets name
 	std::string x;
 	std::cin >> x;
 	NewAccount.setName(x);
 
-	std::cout << "Set a password:\n" << std::endl;  //sets password
+	std::cout << "Set a password: ";  //sets password
 	std::string pwd;
+	std::cin >> pwd;
 	ptr->setPassword(pwd); //same as using BankAccount.setPassword (pwd)
 
-	std::cout << "Please write down your account number:\n" << std::endl;  //sets account number
-	std::cout << AccGen();
+	std::cout << "Please write down your account number: " << AccGen() << "\n" << std::endl;  //sets account number
+	system("pause");
 
 }
 
