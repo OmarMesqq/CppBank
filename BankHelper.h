@@ -7,13 +7,13 @@
 #include <string>
 
 class BankAccount {   //aspects of the bank account
+public:
 	BankAccount() {
 		Balance = 0.0;
 	}
 	~BankAccount() {
 		std::cout << "It was an honor to have you in CppBank. Goodbye!\n\n" << std::endl;
 	}
-public:
 	void Deposit(double AmmIn) {
 		std::cout << "How much are you willing to deposit?" << std::endl;
 		std::cin >> AmmIn;
