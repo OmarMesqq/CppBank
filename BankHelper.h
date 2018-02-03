@@ -5,6 +5,12 @@
 #include <ctime>
 #include <cstdlib>
 #include <string>
+#include <fstream>
+
+unsigned short AccGen() {
+	srand(time(NULL));  //entropy seed : local time
+	return 1 + (rand() % 99);    //returns value between 1 and 99 (range of the bank accounts IDs)
+}
 
 class BankAccount {   //aspects of the bank account
 public:
@@ -42,6 +48,15 @@ public:
 	void setPassword(std::string x) {
 		passwd = x;
 	}
+	void setAccNum() {
+		AccNum = AccGen();
+	}
+	auto getName() {
+		return Name;
+	}
+	auto getAccNum() {
+		return AccNum;
+	}
 	BankAccount * ptr = this;
 private:
 	unsigned short AccNum;
@@ -50,12 +65,7 @@ private:
 	long double Balance;
 };
 
-unsigned short AccGen() {
-	srand(time(NULL));  //entropy seed : local time
-	return 1 + (rand() % 99);    //returns value between 1 and 99 (range of the bank accounts IDs)
-}
-
-void CreateAccount() {
+static void CreateAccount() {
 	BankAccount NewAccount; //creates the object "NewAccount" from class "BankAccount"
 	BankAccount * ptr = &NewAccount; //assigns the pointer to the created object in case of account deletion
 
@@ -67,21 +77,24 @@ void CreateAccount() {
 	std::cout << "Set a password: ";  //sets password
 	std::string pwd;
 	std::cin >> pwd;
+
 	std::cout << "Type in your password again: ";
 	std::string chckPW;
 	std::cin >> chckPW;
-	if (chckPW == pwd) {
+
+	if (chckPW == pwd) {     //checks password
 		ptr->setPassword(pwd);
+		NewAccount.setAccNum();
+		std::fstream MyFile;
+		MyFile.open("account.txt",std::ios::out|std::ios::in);
+		MyFile << "--------------------\n" << "Name: " << NewAccount.getName() << "\n" << "Account number: " << NewAccount.getAccNum() << "\n";
+		MyFile.close();
 	}
 	else {
 		std::cout << "Your passwords do not match" << std::endl;
 		system("pause");
 		exit(0);
 	}
-
-
-	std::cout << "Please write down your account number: " << AccGen() << std::endl;
-	system("pause");
 
 }
 
