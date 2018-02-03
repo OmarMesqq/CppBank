@@ -1,4 +1,4 @@
-// CppBank v 0.3
+// CppBank v 0.4
 #include <iostream>
 #include "BankHelper.h"
 
